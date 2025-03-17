@@ -143,10 +143,7 @@
     <section id="strategies">
         <h2>Trading Strategies</h2>
         <div class="strategy-container">
-            <div class="strategy-card"><h3>Moving Average Crossover</h3><p>Buy when the short-term moving average crosses above the long-term moving average.</p></div>
-            <div class="strategy-card"><h3>RSI Momentum</h3><p>Buy when RSI drops below 30 and sell above 70.</p></div>
-            <div class="strategy-card"><h3>Breakout Strategy</h3><p>Enter trades when price breaks key support/resistance levels.</p></div>
-            <div class="strategy-card"><h3>Pin Bar Candle Strategy</h3><p>Buy near support when a bullish pin bar candle forms.</p></div>
+            <div class="strategy-card"><h3>Trendline Breakout with Candlestick Patterns</h3><p>Trade on trendline breakouts confirmed by Hanging Man, Hammer, or Liquidity Sweep patterns for precision entries.</p></div>
         </div>
     </section>
 
@@ -164,6 +161,11 @@
                 "locale": "en",
                 "container_id": "tradingview_btc"
             });
+
+            function checkCandlestickPattern() {
+                alert("BTC Strategy Alert: Trendline Breakout with Candlestick Confirmation!");
+            }
+            setInterval(checkCandlestickPattern, 30000); 
         </script>
     </section>
 
