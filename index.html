@@ -155,16 +155,12 @@
         </select>
         <div id="tradingview_12345"></div>
         <script>
-            fetch('https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=demo')
-                .then(response => response.text())
+            fetch('https://nifty500-stocks-api.vercel.app/api/stocks')
+                .then(response => response.json())
                 .then(data => {
                     const dropdown = document.getElementById('stockSelector');
-                    const rows = data.split('\n');
-                    rows.forEach(row => {
-                        const columns = row.split(',');
-                        if (columns[0] && columns[1]) {
-                            dropdown.innerHTML += `<option value="${columns[0]}">${columns[1]} (${columns[0]})</option>`;
-                        }
+                    data.forEach(stock => {
+                        dropdown.innerHTML += `<option value="NSE:${stock.symbol}">${stock.name} (${stock.symbol})</option>`;
                     });
                 });
 
