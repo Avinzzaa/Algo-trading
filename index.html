@@ -151,15 +151,21 @@
     <section id="live-chart">
         <h2>Live Nifty 500 Stock Chart</h2>
         <select id="stockSelector">
-            <option value="NSE:NIFTY">Select Stock</option>
+            <option value="">Select Stock</option>
         </select>
         <div id="tradingview_12345"></div>
         <script>
-            fetch('https://api.example.com/nifty500')
-                .then(response => response.json())
+            fetch('https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=demo')
+                .then(response => response.text())
                 .then(data => {
                     const dropdown = document.getElementById('stockSelector');
-                    data.forEach(stock => dropdown.innerHTML += `<option value="NSE:${stock}">${stock}</option>`);
+                    const rows = data.split('\n');
+                    rows.forEach(row => {
+                        const columns = row.split(',');
+                        if (columns[0] && columns[1]) {
+                            dropdown.innerHTML += `<option value="${columns[0]}">${columns[1]} (${columns[0]})</option>`;
+                        }
+                    });
                 });
 
             document.getElementById('stockSelector').addEventListener('change', function() {
