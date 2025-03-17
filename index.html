@@ -123,6 +123,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#strategies">Strategies</a></li>
                 <li><a href="#live-chart">Live Stock Chart</a></li>
+                <li><a href="#btc-chart">BTC Live Chart</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -149,37 +150,19 @@
         </div>
     </section>
 
-    <section id="live-chart">
-        <h2>Live Nifty 500 Stock Chart</h2>
-        <select id="stockSelector">
-            <option value="">Select Stock</option>
-        </select>
-        <div id="tradingview_12345"></div>
+    <section id="btc-chart">
+        <h2>BTC/USDT Live Chart</h2>
+        <div id="tradingview_btc"></div>
         <script>
-            fetch('https://nifty500-stocks-api.vercel.app/api/stocks')
-                .then(response => response.json())
-                .then(data => {
-                    const dropdown = document.getElementById('stockSelector');
-                    data.forEach(stock => {
-                        dropdown.innerHTML += `<option value="NSE:${stock.symbol}">${stock.name} (${stock.symbol})</option>`;
-                    });
-                })
-                .catch(error => console.error('Failed to fetch stocks:', error));
-
-            document.getElementById('stockSelector').addEventListener('change', function() {
-                let symbol = this.value;
-                if (symbol) {
-                    new TradingView.widget({
-                        "width": "100%",
-                        "height": 500,
-                        "symbol": symbol,
-                        "interval": "5",
-                        "theme": "dark",
-                        "style": "1",
-                        "locale": "en",
-                        "container_id": "tradingview_12345"
-                    });
-                }
+            new TradingView.widget({
+                "width": "100%",
+                "height": 500,
+                "symbol": "BINANCE:BTCUSDT",
+                "interval": "5",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "container_id": "tradingview_btc"
             });
         </script>
     </section>
