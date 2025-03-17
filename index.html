@@ -155,11 +155,14 @@
         </select>
         <div id="tradingview_12345"></div>
         <script>
-            const stocks = ['RELIANCE', 'TCS', 'HDFCBANK', 'INFY', 'ICICIBANK', 'SBIN', 'BHARTIARTL', 'HCLTECH', 'LT', 'TATASTEEL'];
-            const dropdown = document.getElementById('stockSelector');
-            stocks.forEach(stock => dropdown.innerHTML += `<option value="NSE:${stock}">${stock}</option>`);
+            fetch('https://api.example.com/nifty500')
+                .then(response => response.json())
+                .then(data => {
+                    const dropdown = document.getElementById('stockSelector');
+                    data.forEach(stock => dropdown.innerHTML += `<option value="NSE:${stock}">${stock}</option>`);
+                });
 
-            dropdown.addEventListener('change', function() {
+            document.getElementById('stockSelector').addEventListener('change', function() {
                 let symbol = this.value;
                 new TradingView.widget({
                     "width": "100%",
